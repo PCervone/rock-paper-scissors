@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>ROCK PAPER SCISSORS</h1>
+        <p>Write <b>game()</b> in the console to start the game.</p>
+        <script>       
+            function playerPlay() {
+                let playerSelection = null;
+                while(playerSelection != "Rock" && playerSelection != "Paper" && playerSelection != "Scissors") {
+                    playerSelection = prompt("Write your play (rock, paper or scissors): ");
+                    playerSelection = `${playerSelection.charAt(0).toUpperCase()}${playerSelection.slice(1).toLowerCase()}`;
+                }
+                return playerSelection;
+            }
+
+            function computerPlay() {
+                let rand = Math.floor(Math.random()*100)+1;
+                if (rand < 34) {
+                    return "Rock";
+                } else if (rand > 33 && rand < 67) {
+                    return "Paper";
+                } else { 
+                    return "Scissors"
+                }  
+            }
+            
+            function playRound(playerSelection, computerSelection) { 
+                console.log("Player choice: " + playerSelection + ". Computer choice: " + computerSelection + ".");
+                if (playerSelection == "Rock" && computerSelection == "Rock") {    
+                    console.log("It's a draw! " + playerSelection + " equals " + computerSelection + ".");
+                    return 0;
+                } else if (playerSelection == "Rock" && computerSelection == "Paper") {
+                    console.log("You lose! " + computerSelection + " beats " + playerSelection + ".");
+                    return 2;
+                } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+                    console.log("You win! " + playerSelection + " beats " + computerSelection + ".");
+                    return 1;
+                } else if (playerSelection == "Paper" && computerSelection == "Paper") {
+                    console.log("It's a draw! " + playerSelection + " equals " + computerSelection + ".");
+                    return 0;
+                } else if (playerSelection == "Paper" && computerSelection == "Scissors") {
+                    console.log("You lose! " + computerSelection + " beats " + playerSelection + ".");
+                    return 2;
+                } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+                    console.log("You win! " + playerSelection + " beats " + computerSelection + ".");
+                    return 1;
+                } else if (playerSelection == "Scissors" && computerSelection == "Scissors") {
+                    console.log("It's a draw! " + playerSelection + " equals " + computerSelection + ".");
+                    return 0;
+                } else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+                    console.log("You lose! " + computerSelection + " beats " + playerSelection + ".");
+                    return 2;
+                } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+                    console.log("You win! " + playerSelection + " beats " + computerSelection + ".");
+                    return 1;
+                }
+            }
+
+            function winner(playerScore,computerScore) {
+                (playerScore > computerScore) ? console.log("You have won! CONGRATS!!") : console.log("Computer has won.. :(");
+            }
+
+            function game() {
+                let playerScore = 0;
+                let computerScore = 0;
+                let roundResult = 0;
+                while(playerScore < 3 && computerScore < 3) {                    
+                    roundResult = playRound(playerPlay(), computerPlay());
+                    if (roundResult == 1) {
+                        ++playerScore;
+                    } else if (roundResult == 2) {
+                        ++computerScore;
+                    }
+                    console.log("| SCORE |\nPlayer: " + playerScore + ".\nComputer: " + computerScore + ".");
+                }
+                winner(playerScore,computerScore);
+            }
+        </script>
+    </body>
+</html>
